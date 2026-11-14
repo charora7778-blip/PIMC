@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="chatbot.css">
 	<style>
 		:root { --ink: #18231f; --paper: #f5f4ed; --lime: #d7ed69; --coral: #e78366; --muted: #6d746d; --line: #d9dbd1; --display: "Manrope", sans-serif; --body: "DM Sans", sans-serif; }
 		* { box-sizing: border-box; }
@@ -28,22 +29,9 @@
 		h1, h2, p { margin-top: 0; }
 		h1 { max-width: 660px; margin-bottom: 18px; font: 600 56px/1.08 var(--display); }
 		.lead { max-width: 620px; margin-bottom: 48px; color: var(--muted); font-size: 18px; line-height: 1.7; }
-		.contact-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 70px; align-items: start; }
-		.form-panel { padding: 34px; background: #fff; border: 1px solid var(--line); }
-		.form-panel h2 { margin-bottom: 26px; font: 600 24px var(--display); }
-		.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 18px; }
-		.field { display: flex; flex-direction: column; gap: 8px; }
-		.field-full { grid-column: 1 / -1; }
-		label { font-size: 13px; font-weight: 700; }
-		input, select, textarea { width: 100%; min-height: 48px; padding: 12px 13px; border: 1px solid #cdd1c8; border-radius: 0; background: #fff; color: var(--ink); font: 15px var(--body); }
-		textarea { min-height: 145px; resize: vertical; }
-		input:focus, select:focus, textarea:focus { outline: 2px solid #76803f; outline-offset: 2px; }
-		.submit { min-height: 52px; display: inline-flex; align-items: center; gap: 20px; padding: 0 20px; border: 0; background: var(--ink); color: #fff; font: 700 14px var(--body); cursor: pointer; }
-		.submit:hover { background: #2e3c35; }
-		.form-note { margin: 18px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
-		.contact-aside { padding-top: 8px; }
-		.contact-aside h2 { margin-bottom: 16px; font: 600 24px/1.3 var(--display); }
-		.contact-aside p { color: #555e57; line-height: 1.75; }
+		.contact-copy { max-width: 760px; }
+		.contact-copy h2 { margin-bottom: 16px; font: 600 24px/1.3 var(--display); }
+		.contact-copy p { color: #555e57; line-height: 1.75; }
 		.email-link { display: inline-block; margin-top: 8px; font-weight: 700; text-decoration-color: #9da581; text-underline-offset: 5px; }
 		footer { padding: 25px 0; background: var(--ink); color: #c3cbc3; }
 		.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 25px; font-size: 12px; }
@@ -59,10 +47,7 @@
 			main { padding: 56px 0 70px; }
 			h1 { font-size: 42px; }
 			.lead { margin-bottom: 32px; font-size: 16px; }
-			.contact-layout { grid-template-columns: 1fr; gap: 35px; }
-			.form-panel { padding: 24px 20px; }
 		}
-		@media (max-width: 430px) { .form-grid { grid-template-columns: 1fr; } .field-full { grid-column: auto; } }
 	</style>
 </head>
 <body>
@@ -80,56 +65,13 @@
 	<main class="wrap">
 		<p class="eyebrow">Let’s start a conversation</p>
 		<h1>Tell us what you’re working through.</h1>
-		<p class="lead">Share a little about your goals or challenge. PIMC will get back to you to discuss the right next step.</p>
-		<div class="contact-layout">
-			<section class="form-panel" aria-labelledby="form-title">
-				<h2 id="form-title">Send an enquiry</h2>
-				<form action="https://formsubmit.co/info@pimc.au" method="POST">
-					<input type="hidden" name="_subject" value="New PIMC website enquiry">
-					<input type="hidden" name="_template" value="table">
-					<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-					<div class="form-grid">
-						<div class="field">
-							<label for="name">Your name</label>
-							<input id="name" name="name" type="text" autocomplete="name" required>
-						</div>
-						<div class="field">
-							<label for="email">Work email</label>
-							<input id="email" name="email" type="email" autocomplete="email" required>
-						</div>
-						<div class="field">
-							<label for="company">Company</label>
-							<input id="company" name="company" type="text" autocomplete="organization">
-						</div>
-						<div class="field">
-							<label for="interest">How can we help?</label>
-							<select id="interest" name="area_of_interest">
-								<option value="">Select an area</option>
-								<option>Consulting</option>
-								<option>Advisory</option>
-								<option>Managed services</option>
-								<option>Agentic AI</option>
-								<option>Not sure yet</option>
-							</select>
-						</div>
-						<div class="field field-full">
-							<label for="message">A little about your goals or challenge</label>
-							<textarea id="message" name="message" required></textarea>
-						</div>
-						<div class="field field-full">
-							<button class="submit" type="submit">Send enquiry <span aria-hidden="true">↗</span></button>
-						</div>
-					</div>
-				</form>
-				<p class="form-note">This form is processed by FormSubmit and forwarded to PIMC so we can respond. Please don’t include sensitive information.</p>
-			</section>
-			<aside class="contact-aside">
-				<h2>A good first conversation starts with context.</h2>
-				<p>Let us know what you’re aiming to achieve, what’s getting in the way, or where you’d value another perspective. You don’t need to have the whole brief figured out.</p>
-				<p>Prefer email? Write to us directly:</p>
-				<a class="email-link" href="mailto:info@pimc.au">info@pimc.au</a>
-			</aside>
-		</div>
+		<p class="lead">Tell us what you’re working through, or use the chat bubble to share your goals with our AI assistant.</p>
+		<section class="contact-copy" aria-labelledby="contact-context-title">
+			<h2 id="contact-context-title">A good first conversation starts with context.</h2>
+			<p>Let us know what you’re aiming to achieve, what’s getting in the way, or where you’d value another perspective. You don’t need to have the whole brief figured out.</p>
+			<p>Prefer email? Write to us directly:</p>
+			<a class="email-link" href="mailto:pimc@pimc.au">pimc@pimc.au</a>
+		</section>
 	</main>
 	<footer>
 		<div class="footer-inner wrap">
@@ -138,5 +80,6 @@
 			<span>© 2026 PIMC</span>
 		</div>
 	</footer>
+	<script src="chatbot.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+{
+  "name": "pimc-contact-chat-api",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/functions/*.js",
+  "dependencies": {
+    "@azure/functions": "^4.7.2"
+  }
+}
