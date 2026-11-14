@@ -99,6 +99,10 @@
 		event.preventDefault();
 		const text = chatInput.value.trim();
 		if (!text) return;
+		if (window.location.protocol === "file:") {
+			chatStatus.textContent = "The AI chat needs its Azure API. Open the deployed website over HTTPS; opening this HTML file directly cannot connect to the chat service.";
+			return;
+		}
 
 		chatInput.value = "";
 		chatInput.disabled = true;
@@ -114,6 +118,9 @@
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ messages })
 			});
+			if (!response.headers.get("content-type")?.includes("application/json")) {
+				throw new Error("The chat API is unavailable at this address. Open the deployed Azure Static Web App or run it with Azure Static Web Apps CLI.");
+			}
 			const result = await response.json();
 			if (!response.ok) throw new Error(result.error || "The assistant couldn’t reply. Please try again.");
 			if (typeof result.reply !== "string" || !result.contact) {
@@ -145,7 +152,9 @@
 			userMessage.remove();
 			messages.pop();
 			chatInput.value = text;
-			chatStatus.textContent = error instanceof Error ? error.message : "The assistant couldn’t reply. Please try again.";
+			chatStatus.textContent = error instanceof TypeError
+				? "Couldn’t reach the chatbot API. Check that the Azure API is deployed and OPENAI_API_KEY is configured."
+				: error instanceof Error ? error.message : "The assistant couldn’t reply. Please try again.";
 		} finally {
 			chatInput.disabled = false;
 			chatSend.disabled = false;
